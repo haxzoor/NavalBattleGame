@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Морской Бой</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Морской Бой</h1>
+        <p>Координаты начинаются с 1</p>
+        <div id="timer">Время: 00:00</div>
+        <div id="gameBoard">
+            <table id="board">
+                {% for row_index in range(10) %}
+                <tr>
+                    {% for col_index in range(10) %}
+                    <td class="{{ board[row_index][col_index] | lower }}" data-x="{{ col_index }}" data-y="{{ row_index }}"></td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <form id="gameForm">
+            <label for="x">Координата X:</label>
+            <input type="number" name="x" id="x" min="1" max="10" required>
+            <label for="y">Координата Y:</label>
+            <input type="number" name="y" id="y" min="1" max="10" required>
+            <button type="submit">Выстрелить</button>
+        </form>
+        <button id="resetGame">Начать игру заново</button>
+        <div id="result"></div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
